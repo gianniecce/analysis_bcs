@@ -23,6 +23,23 @@ TimeLongToWide = function(dta = weekend, id = 'id', av = 'av', time = 'time'){
 
 
 
+# Mean By Rows - or Grand Mean 
+TimeLongToWideMeanById = function(dta = weekend, byAct = F){
+  
+  # Sequence 
+  seqDay = dta[rep(1:nrow(dta), dta[,time] ), -3] %>%
+    group_by(id) %>% 
+    mutate( Time = 1:n() ) %>%
+    dcast(id ~ av) 
+  
+  if(byAct == T){
+    seqDay = apply(MeanAct[,-1], MARGIN = 2, FUN = mean) 
+    print("The mean minutes by Activities: ")
+  }
+  
+  return(seqDay)
+}
+
 
 
 source_https <- function(url, ...) {
