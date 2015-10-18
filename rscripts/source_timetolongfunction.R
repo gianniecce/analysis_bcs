@@ -26,8 +26,10 @@ TimeLongToWide = function(dta = weekend, id = 'id', av = 'av', time = 'time'){
 # Mean By Rows - or Grand Mean 
 TimeLongToWideMeanById = function(dta = weekend, byAct = F){
   
+  dta = as.data.frame(dta)
+  
   # Sequence 
-  seqDay = dta[rep(1:nrow(dta), dta[,time] ), -3] %>%
+  seqDay = dta[rep(1:nrow(dta), dta[,'time'] ), -3] %>%
     group_by(id) %>% 
     mutate( Time = 1:n() ) %>%
     dcast(id ~ av) 
