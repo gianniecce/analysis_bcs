@@ -35,7 +35,7 @@ TimeLongToWideMeanById = function(dta = weekend, byAct = F){
     dcast(id ~ av) 
   
   if(byAct == T){
-    seqDay = apply(MeanAct[,-1], MARGIN = 2, FUN = mean) 
+    seqDay = apply(seqDay[,-1], MARGIN = 2, FUN = mean) 
     print("The mean minutes by Activities: ")
   }
   
