@@ -5,10 +5,12 @@
 # dta = dta[, c('id', 'av', 'time')] 
 
 # Long to Wide 
-TimeLongToWide = function(dta = weekend, id = 'id', av = 'av', time = 'time'){
+TimeLongToWide = function(dta = weekend){
+  
+  dta = as.data.frame(dta)
   
   # Sequence 
-  seqDay = dta[rep(1:nrow(dta), dta[,time] ), -3] %>%
+  seqDay = dta[rep(1:nrow(dta), dta[,'time'] ), -3] %>%
     group_by(id) %>% 
     mutate( Time = 1:n() ) %>%
     spread(Time, av)
